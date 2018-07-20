@@ -8,8 +8,12 @@ public class SpirtScript : MonoBehaviour {
     public GameObject player;
     bool go = false;
 
-	// Use this for initialization
-	void Start ()
+    public Transform target;
+
+    // Speed in units per sec.
+    public float speed;
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
@@ -28,7 +32,11 @@ public class SpirtScript : MonoBehaviour {
     {
         if (go == true)
         {
-            transform.Translate(0, 0 , 2);
+            float step = speed * Time.deltaTime;
+
+            // Move our position a step closer to the target.
+            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
             Debug.Log("Follow, Follow");
 
         }
@@ -38,5 +46,6 @@ public class SpirtScript : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(5);
         go = true;
+        StopCoroutine(Wait());
     }
 }
