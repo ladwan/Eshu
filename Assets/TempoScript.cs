@@ -33,6 +33,11 @@ public class TempoScript : MonoBehaviour {
     {
         
 
+        yield return new WaitForSecondsRealtime(0.5f);
+        BeatsPerMeasure++;
+        alphacolor.a = 0.2f;
+        Invoke("TurnOffVignette", 0.1f);
+
         if (BeatsPerMeasure >= 4)
         {
             alphacolor.a = 0.75f;
@@ -41,17 +46,13 @@ public class TempoScript : MonoBehaviour {
 
         }
 
-       
-
-        yield return new WaitForSecondsRealtime(0.5f);
-        BeatsPerMeasure++;
-        alphacolor.a = 0.2f;
-        yield return new WaitForSecondsRealtime(0.01f);
-        alphacolor.a = 0;
-
-
         Debug.Log(BeatsPerMeasure + "dot");
         StartCoroutine(Beat());
 
+    }
+
+    void TurnOffVignette()
+    {
+        alphacolor.a = 0;
     }
 }
