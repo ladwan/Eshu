@@ -14,10 +14,7 @@ public class TempoScript : MonoBehaviour {
 	void Start ()
     {
         Vignette = TempoCanvas.transform.GetChild(0).GetComponent<RawImage>();
-        if (Vignette != null)
-        {
-            Debug.Log("boom bitch");
-        }
+    
         StartCoroutine(Beat());
         alphacolor.a = 0;
         
@@ -41,12 +38,12 @@ public class TempoScript : MonoBehaviour {
         if (BeatsPerMeasure >= 4)
         {
             alphacolor.a = 0.75f;
-            Debug.Log("Beat");
+            //Debug.Log("Beat");
             BeatsPerMeasure = 0;
 
         }
 
-        Debug.Log(BeatsPerMeasure + "dot");
+        //Debug.Log(BeatsPerMeasure + "dot");
         StartCoroutine(Beat());
 
     }

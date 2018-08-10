@@ -23,7 +23,8 @@ public class SpirtScript : MonoBehaviour {
 
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("You very alone,  you want dance?");
+            //Debug.Log("You very alone?  you want dance?");
+            Debug.Log("Dance 1 Initiated");
             StartCoroutine(Wait());
         }
     }
