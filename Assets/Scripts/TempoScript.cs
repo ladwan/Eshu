@@ -14,7 +14,7 @@ public class TempoScript : MonoBehaviour {
     public Text CompareText,FailText,ScoreText;
     GameObject GameOverPanel;
     bool GameisOver;
-    
+    public GameObject Sprirt1REF;
    
 	// Use this for initialization
 	void Start ()
@@ -83,6 +83,8 @@ public class TempoScript : MonoBehaviour {
 
         if (BeatsPerMeasure >= 4)
         {
+
+            StartCoroutine(Sprirt1REF.GetComponent<Spirit1>().Dance());
             CurrentDance = 10;
             alphacolor.a = 0.75f;
             //Debug.Log("Beat");

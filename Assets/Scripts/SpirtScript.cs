@@ -34,7 +34,7 @@ public class SpirtScript : MonoBehaviour {
         if (go == true)
         {
             float step = speed * Time.deltaTime;
-
+            
             // Move our position a step closer to the target.
             transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
@@ -43,7 +43,7 @@ public class SpirtScript : MonoBehaviour {
         }
     }
 
-    IEnumerator Wait()
+    public IEnumerator Wait()
     {
         yield return new WaitForSecondsRealtime(5);
         go = true;
