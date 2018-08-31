@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Spirit1 : MonoBehaviour {
+
     int DanceToPerform, CpuDance, PlayerDance, PointsToWin;
+    public Text MoveToCopy;
+
+
 	// Use this for initialization
 	void Start ()
     {
@@ -15,6 +19,7 @@ public class Spirit1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        MoveToCopy.text = CpuDance.ToString();
        DanceToPerform =  Random.Range(1, 5);
 
         if(PointsToWin >= 5)
