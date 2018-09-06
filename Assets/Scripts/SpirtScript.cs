@@ -45,7 +45,7 @@ public class SpirtScript : MonoBehaviour {
 
     public IEnumerator Wait()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(10);
         go = true;
         StopCoroutine(Wait());
     }

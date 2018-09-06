@@ -6,7 +6,9 @@ public class Spirit1 : MonoBehaviour {
 
     int DanceToPerform, CpuDance, PlayerDance, PointsToWin;
     public Text MoveToCopy;
-
+    public Animator Anim;
+    bool DanceREf;
+    public GameObject PlayerREF;
 
 	// Use this for initialization
 	void Start ()
@@ -19,6 +21,7 @@ public class Spirit1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        DanceREf = PlayerREF.GetComponent<playercontrol>().DanceStarted;
         MoveToCopy.text = CpuDance.ToString();
        DanceToPerform =  Random.Range(1, 5);
 
@@ -50,71 +53,99 @@ public class Spirit1 : MonoBehaviour {
 
     public IEnumerator Dance()
     {
-        yield return new WaitForSeconds(0);
-        switch (DanceToPerform)
+        if (DanceREf == true)
         {
-            case 1:
-                CpuDance = 1;
-                Debug.Log("Watch Me");
-
-                if(PlayerDance == CpuDance)
-                {
-                    PointsToWin++;
-                }
-                else
-                {
-                    Debug.Log("Wrong Move");
-                }
-
-                break;
-
-            case 2:
-                CpuDance = 2;
-                Debug.Log("Look Here");
-
-                if (PlayerDance == CpuDance)
-                {
-                    PointsToWin++;
-                }
-                else
-                {
-                    Debug.Log("Wrong Move");
-                }
 
 
-                break;
+            yield return new WaitForSeconds(0);
+            switch (DanceToPerform)
+            {
+                case 1:
+                    CpuDance = 1;
+                    Anim.SetTrigger("IsTilt1");
+                    Debug.Log("Watch Me");
 
-            case 3:
-                CpuDance = 3;
-                Debug.Log("Keep Up");
+                    if (PlayerDance == CpuDance)
+                    {
+                        PointsToWin++;
+                        PlayerREF.GetComponent<TempoScript>().ScoreTick += 10;
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong Move");
+                        PlayerREF.GetComponent<TempoScript>().FailTick++;
 
-                if (PlayerDance == CpuDance)
-                {
-                    PointsToWin++;
-                }
-                else
-                {
-                    Debug.Log("Wrong Move");
-                }
+                    }
+
+                    break;
+
+                case 2:
+                    CpuDance = 2;
+                    Anim.SetTrigger("IsTilt2");
+
+                    Debug.Log("Look Here");
+
+                    if (PlayerDance == CpuDance)
+                    {
+
+                        PointsToWin++;
+                        PlayerREF.GetComponent<TempoScript>().ScoreTick += 10;
+
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong Move");
+                        PlayerREF.GetComponent<TempoScript>().FailTick++;
+
+                    }
 
 
-                break;
+                    break;
 
-            case 4:
-                CpuDance = 4;
-                Debug.Log("Yes Yes !");
+                case 3:
+                    CpuDance = 3;
+                    Anim.SetTrigger("IsTilt3");
 
-                if (PlayerDance == CpuDance)
-                {
-                    PointsToWin++;
-                }
-                else
-                {
-                    Debug.Log("Wrong Move");
-                }
+                    Debug.Log("Keep Up");
+
+                    if (PlayerDance == CpuDance)
+                    {
+                        PointsToWin++;
+                        PlayerREF.GetComponent<TempoScript>().ScoreTick += 10;
+
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong Move");
+                        PlayerREF.GetComponent<TempoScript>().FailTick++;
+
+                    }
 
 
-                break;
+                    break;
+
+                case 4:
+                    CpuDance = 4;
+                    Anim.SetTrigger("IsTilt4");
+
+                    Debug.Log("Yes Yes !");
+
+                    if (PlayerDance == CpuDance)
+                    {
+                        PointsToWin++;
+                        PlayerREF.GetComponent<TempoScript>().ScoreTick += 10;
+
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong Move");
+                        PlayerREF.GetComponent<TempoScript>().FailTick++;
+
+                    }
+
+
+                    break;
+            }
         }
 
     }

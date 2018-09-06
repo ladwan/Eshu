@@ -10,7 +10,7 @@ public class TempoScript : MonoBehaviour {
     int BeatsPerMeasure;
      RawImage Vignette;
     Color alphacolor;
-    int CurrentDance = 1, CPUDance = 10,FailTick,ScoreTick;
+    public int CurrentDance = 1, CPUDance = 10,FailTick,ScoreTick;
     public Text CompareText,FailText,ScoreText;
     GameObject GameOverPanel;
     bool GameisOver;

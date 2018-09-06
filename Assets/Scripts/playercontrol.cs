@@ -10,7 +10,7 @@ public class playercontrol : MonoBehaviour {
     // Speed in units per sec.
     public float speed;
     public float Movespeed = 2;
-
+    public bool DanceStarted;
     public bool Follow = true;
 
     void OnTriggerEnter(Collider other)
@@ -22,6 +22,7 @@ public class playercontrol : MonoBehaviour {
             speed = 0;
             StartCoroutine(Wait());
             Follow = false;
+            DanceStarted = true;
         }
     }
     void Update()
@@ -46,9 +47,10 @@ public class playercontrol : MonoBehaviour {
 
     IEnumerator Wait()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(10);
         speed = Movespeed;
         Follow = true;
+        DanceStarted = false;
         StopCoroutine(Wait());
     }
 
