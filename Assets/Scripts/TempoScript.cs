@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class TempoScript : MonoBehaviour {
 
     public Canvas TempoCanvas;
-    int BeatsPerMeasure;
+   public int BeatsPerMeasure;
      RawImage Vignette;
     Color alphacolor;
     public int CurrentDance = 1, CPUDance = 10,FailTick,ScoreTick;
@@ -15,6 +15,8 @@ public class TempoScript : MonoBehaviour {
     GameObject GameOverPanel;
     bool GameisOver;
     public GameObject Sprirt1REF;
+    bool DanceStartedREF;
+    public GameObject PlayerREF;
    
 	// Use this for initialization
 	void Start ()
@@ -32,7 +34,8 @@ public class TempoScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if(GameisOver == true)
+        DanceStartedREF = PlayerREF.GetComponent<playercontrol>().DanceStarted;
+        if (GameisOver == true)
         {
             if (Input.anyKeyDown)
             {
@@ -47,26 +50,29 @@ public class TempoScript : MonoBehaviour {
             GameOverPanel.SetActive(true);
             GameisOver = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (DanceStartedREF == false)
         {
 
-            if (CurrentDance == CPUDance)
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                CompareText.text = "Correct";
-                ScoreTick += 10 ;
-               // Debug.Log("Correct");
-            }
-            else
-            {
-                CompareText.text = "Fail";
-                FailTick++;
-                //Debug.Log("Fail");
+
+                if (CurrentDance == CPUDance)
+                {
+                    CompareText.text = "Correct";
+                    ScoreTick += 10;
+                    // Debug.Log("Correct");
+                }
+                else
+                {
+                    CompareText.text = "Fail";
+                    FailTick++;
+                    //Debug.Log("Fail");
+
+                }
 
             }
-
         }
-
 
         Vignette.color = alphacolor;
     }
@@ -80,6 +86,15 @@ public class TempoScript : MonoBehaviour {
         BeatsPerMeasure++;
         alphacolor.a = 0.2f;
         Invoke("TurnOffVignette", 0.1f);
+        if (DanceStartedREF == true)
+        {
+
+
+            if (BeatsPerMeasure == 3)
+            {
+                StartCoroutine(Sprirt1REF.GetComponent<Spirit1>().PreDance());
+            }
+        }
 
         if (BeatsPerMeasure >= 4)
         {
