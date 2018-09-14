@@ -7,6 +7,7 @@ public class SpirtScript : MonoBehaviour {
     public Collider Checkbox;
     public GameObject player;
     bool go = false;
+    public bool Dance1Complete = false;
 
     public Transform target;
 
@@ -47,6 +48,7 @@ public class SpirtScript : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(10);
         go = true;
+        Dance1Complete = true;
         StopCoroutine(Wait());
     }
 }

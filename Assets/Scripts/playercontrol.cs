@@ -10,7 +10,7 @@ public class playercontrol : MonoBehaviour {
     // Speed in units per sec.
     public float speed;
     public float Movespeed = 2;
-    public bool DanceStarted;
+    public bool DanceStarted = false;
     public bool Follow = true;
 
     void OnTriggerEnter(Collider other)

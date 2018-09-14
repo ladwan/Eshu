@@ -17,6 +17,7 @@ public class TempoScript : MonoBehaviour {
     public GameObject Sprirt1REF;
     bool DanceStartedREF;
     public GameObject PlayerREF;
+    public Text DanceToCopy;
    
 	// Use this for initialization
 	void Start ()
@@ -34,6 +35,16 @@ public class TempoScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+        if (DanceStartedREF == true)
+        {
+            DanceToCopy.enabled = true;
+        }
+        else
+        {
+            DanceToCopy.enabled = false;
+        }
+
         DanceStartedREF = PlayerREF.GetComponent<playercontrol>().DanceStarted;
         if (GameisOver == true)
         {
@@ -83,6 +94,8 @@ public class TempoScript : MonoBehaviour {
 
         yield return new WaitForSecondsRealtime(0.5f);
         CurrentDance = 1;
+        DanceToCopy.fontSize = 50;
+
         BeatsPerMeasure++;
         alphacolor.a = 0.2f;
         Invoke("TurnOffVignette", 0.1f);
@@ -90,7 +103,7 @@ public class TempoScript : MonoBehaviour {
         {
 
 
-            if (BeatsPerMeasure == 3)
+            if (BeatsPerMeasure == 2)
             {
                 StartCoroutine(Sprirt1REF.GetComponent<Spirit1>().PreDance());
             }
@@ -100,6 +113,7 @@ public class TempoScript : MonoBehaviour {
         {
 
             StartCoroutine(Sprirt1REF.GetComponent<Spirit1>().Dance());
+            DanceToCopy.fontSize = 75;
             CurrentDance = 10;
             alphacolor.a = 0.75f;
             //Debug.Log("Beat");
