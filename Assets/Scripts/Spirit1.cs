@@ -34,23 +34,23 @@ public class Spirit1 : MonoBehaviour {
             Debug.Log("Amazing");
         }
 
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             PlayerDance = 1;
             Debug.Log("dude");
         }
 
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             PlayerDance = 2;
         }
 
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             PlayerDance = 3;
         }
 
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             PlayerDance = 4;
         }

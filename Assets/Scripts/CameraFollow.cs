@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
@@ -11,6 +12,7 @@ public class CameraFollow : MonoBehaviour {
     public bool DanceBegunREF;
     public int GamePhase = 1;
 
+    
     private void LateUpdate()
     {
         DanceBegunREF = PlayerREF.GetComponent<playercontrol>().DanceStarted;
@@ -24,10 +26,10 @@ public class CameraFollow : MonoBehaviour {
             GamePhase = 2;
         }
 
-        transform.LookAt(target);
+        //transform.LookAt(target);
         if (GamePhase == 2)
         {
-            offset = new Vector3(8, 5, 7);
+            offset = new Vector3(16, 7, 5);
 
 
         }
@@ -45,11 +47,16 @@ public class CameraFollow : MonoBehaviour {
 
         if (DanceBegunREF == true && GamePhase == 1)
         {
-            offset = new Vector3(-8, 6, 5);
+            offset = new Vector3(3.2f, 4.04f, -1.24f);
         }
-        /* else
-        {
-            offset = new Vector3(4, 4, 5);
-        } */
-    } 
+     
+    }
+
+    IEnumerator Delay()
+    {
+
+    }
+ 
+
+
 }

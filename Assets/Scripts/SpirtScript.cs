@@ -8,7 +8,8 @@ public class SpirtScript : MonoBehaviour {
     public GameObject player;
     bool go = false;
     public bool Dance1Complete = false;
-
+    public Animator Anim;
+    public ParticleSystem FireWorks;
     public Transform target;
 
     // Speed in units per sec.
@@ -16,7 +17,7 @@ public class SpirtScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		
+        FireWorks.enableEmission = false;
 	}
 
     void OnTriggerEnter(Collider other)
@@ -46,9 +47,20 @@ public class SpirtScript : MonoBehaviour {
 
     public IEnumerator Wait()
     {
-        yield return new WaitForSecondsRealtime(10);
-        go = true;
+        yield return new WaitForSecondsRealtime(8);
+        FireWorks.enableEmission = true;
+
+        yield return new WaitForSecondsRealtime(2);
+       
+
         Dance1Complete = true;
+        Anim.SetTrigger("IsJump");
+
+        yield return new WaitForSecondsRealtime(2);
+        go = true;
+        FireWorks.enableEmission = false;
+
+
         StopCoroutine(Wait());
     }
 }

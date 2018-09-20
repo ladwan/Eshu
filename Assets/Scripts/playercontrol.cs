@@ -12,6 +12,7 @@ public class playercontrol : MonoBehaviour {
     public float Movespeed = 2;
     public bool DanceStarted = false;
     public bool Follow = true;
+    public GameObject Spirit1REF, CameraREF;
 
     void OnTriggerEnter(Collider other)
     {
@@ -47,10 +48,16 @@ public class playercontrol : MonoBehaviour {
 
     IEnumerator Wait()
     {
+        CameraREF.GetComponent<CameraFollow>().now = true;
         yield return new WaitForSecondsRealtime(10);
+        DanceStarted = false;
+        yield return new WaitForSecondsRealtime(2);
+
         speed = Movespeed;
         Follow = true;
         DanceStarted = false;
+        CameraREF.GetComponent<CameraFollow>().now = false;
+
         StopCoroutine(Wait());
     }
 
