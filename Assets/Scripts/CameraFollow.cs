@@ -12,8 +12,10 @@ public class CameraFollow : MonoBehaviour {
     public bool DanceBegunREF;
     public int GamePhase = 1;
     public bool doOnce = false;
+    public bool doOnce2 = false;
 
-    
+
+
     private void LateUpdate()
     {
         DanceBegunREF = PlayerREF.GetComponent<playercontrol>().DanceStarted;
@@ -22,18 +24,19 @@ public class CameraFollow : MonoBehaviour {
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition,smoothspeed);
         transform.position = smoothedPosition;
 
-        if (SpiritREF.GetComponent<SpirtScript>().Dance1Complete == true)
-        {
-            GamePhase = 2;
-        }
-
-        //transform.LookAt(target);
-        if (GamePhase == 2 && doOnce == false)
+        if (SpiritREF.GetComponent<SpirtScript>().Dance1Complete == true && doOnce == false)
         {
             doOnce = true;
             StartCoroutine(Delay());
         }
 
+        //transform.LookAt(target);
+
+        if (GamePhase == 2 && SpiritREF.GetComponent<SpirtScript>().SnapCam == true && doOnce2 == false)
+        {
+            doOnce2 = true;
+            StartCoroutine(Delay2());
+        }
 
         if (now == true)
         {
@@ -59,9 +62,19 @@ public class CameraFollow : MonoBehaviour {
         yield return new WaitForSecondsRealtime (2);
 
         offset = new Vector3(24, 5, -7);
+        GamePhase = 2;
         StopCoroutine(Delay());
     }
 
+    IEnumerator Delay2()
+    {
+        offset = new Vector3(-37, 7, 5);
+        yield return new WaitForSecondsRealtime(2);
+
+        
+        
+        StopCoroutine(Delay2());
+    }
 
 
 }
