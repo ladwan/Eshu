@@ -8,7 +8,7 @@ public class Spirit1 : MonoBehaviour {
     public Text MoveToCopy;
     public Animator Anim;
     bool DanceREf;
-    public GameObject PlayerREF;
+    public GameObject PlayerREF,SpritREF;
 
 
 	// Use this for initialization
@@ -59,7 +59,7 @@ public class Spirit1 : MonoBehaviour {
     public IEnumerator Dance()
     {
        
-        if (DanceREf == true)
+        if (DanceREf == true && SpritREF.GetComponent<SpirtScript>().Dance1Complete == false)
         {
 
 

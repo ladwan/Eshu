@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour {
     public GameObject PlayerREF,SpiritREF;
     public bool DanceBegunREF;
     public int GamePhase = 1;
+    public bool doOnce = false;
 
     
     private void LateUpdate()
@@ -27,11 +28,10 @@ public class CameraFollow : MonoBehaviour {
         }
 
         //transform.LookAt(target);
-        if (GamePhase == 2)
+        if (GamePhase == 2 && doOnce == false)
         {
-            offset = new Vector3(16, 7, 5);
-
-
+            doOnce = true;
+            StartCoroutine(Delay());
         }
 
 
@@ -54,9 +54,14 @@ public class CameraFollow : MonoBehaviour {
 
     IEnumerator Delay()
     {
+        offset = new Vector3(16, 7, 5);
 
+        yield return new WaitForSecondsRealtime (2);
+
+        offset = new Vector3(24, 5, -7);
+        StopCoroutine(Delay());
     }
- 
+
 
 
 }

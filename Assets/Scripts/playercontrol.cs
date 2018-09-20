@@ -49,10 +49,7 @@ public class playercontrol : MonoBehaviour {
     IEnumerator Wait()
     {
         CameraREF.GetComponent<CameraFollow>().now = true;
-        yield return new WaitForSecondsRealtime(10);
-        DanceStarted = false;
-        yield return new WaitForSecondsRealtime(2);
-
+        yield return new WaitForSecondsRealtime(15);
         speed = Movespeed;
         Follow = true;
         DanceStarted = false;

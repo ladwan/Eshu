@@ -18,6 +18,7 @@ public class TempoScript : MonoBehaviour {
     bool DanceStartedREF;
     public GameObject PlayerREF;
     public Text DanceToCopy;
+    public bool SpacePressed;
    
 	// Use this for initialization
 	void Start ()
@@ -29,11 +30,16 @@ public class TempoScript : MonoBehaviour {
     
         StartCoroutine(Beat());
         alphacolor.a = 0;
-        
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        alphacolor.r = 0;
+        alphacolor.g = 0;
+        alphacolor.b = 0;
+
+
+
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 
         if (DanceStartedREF == true)
@@ -50,7 +56,10 @@ public class TempoScript : MonoBehaviour {
         {
             if (Input.anyKeyDown)
             {
+                
+
                 SceneManager.LoadScene(0);
+               
             }
         }
 
@@ -59,6 +68,7 @@ public class TempoScript : MonoBehaviour {
         if (FailTick >= 3)
         {
             GameOverPanel.SetActive(true);
+            
             GameisOver = true;
         }
         if (DanceStartedREF == false)
@@ -67,6 +77,8 @@ public class TempoScript : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                SpacePressed = true;
+                StartCoroutine(SpaceDelay());
 
                 if (CurrentDance == CPUDance)
                 {
@@ -97,7 +109,10 @@ public class TempoScript : MonoBehaviour {
         DanceToCopy.fontSize = 50;
 
         BeatsPerMeasure++;
-        alphacolor.a = 0.2f;
+        alphacolor.a = 0.3f;
+        alphacolor.r = 0.3f;
+        alphacolor.g = 0.3f;
+        alphacolor.b = 0.3f;
         Invoke("TurnOffVignette", 0.1f);
         if (DanceStartedREF == true)
         {
@@ -111,11 +126,18 @@ public class TempoScript : MonoBehaviour {
 
         if (BeatsPerMeasure >= 4)
         {
-
+            StartCoroutine(SpaceCheck());
             StartCoroutine(Sprirt1REF.GetComponent<Spirit1>().Dance());
             DanceToCopy.fontSize = 75;
-            CurrentDance = 10;
-            alphacolor.a = 0.75f;
+          
+                CurrentDance = 10;
+
+            
+           
+            alphacolor.a = 1f;
+            alphacolor.r = 1f;
+            alphacolor.g = 1f;
+            alphacolor.b = 1f;
             //Debug.Log("Beat");
             BeatsPerMeasure = 0;
 
@@ -129,5 +151,28 @@ public class TempoScript : MonoBehaviour {
     void TurnOffVignette()
     {
         alphacolor.a = 0;
+        alphacolor.r = 0;
+        alphacolor.g = 0;
+        alphacolor.b = 0;
+    }
+
+    IEnumerator SpaceDelay()
+    {
+        yield return new WaitForSecondsRealtime(.3f);
+        SpacePressed = false;
+        StopCoroutine(SpaceDelay());
+    }
+    IEnumerator SpaceCheck()
+    {
+        yield return new WaitForSecondsRealtime(.2f);
+        /*if(DanceStartedREF == false)
+        {
+            if (SpacePressed == false)
+            {
+                FailTick++;
+            }
+        }*/
+
+        StopCoroutine(SpaceCheck());
     }
 }

@@ -59,6 +59,7 @@ public class SpirtScript : MonoBehaviour {
         yield return new WaitForSecondsRealtime(2);
         go = true;
         FireWorks.enableEmission = false;
+       
 
 
         StopCoroutine(Wait());
